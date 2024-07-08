@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 mt-5">
+      <div class="row">
+        <div *ngFor="let fruit of fruits" class="col-3">
+          <div class="card p-2">
+            <img [src]="fruit.image" alt="{{ fruit.nom }}" class="img-fluid" />
+            <div class="card-body">
+              <h5 class="card-title">{{ fruit.nom }}</h5>
+              <p class="card-text">{{ fruit.prixHT }} €</p>
+              <p class="card-text">{{ fruit.quantite }}</p>
+              <div class="row mb-3">
+                <div class="col-3">
+                  <button (click)="moinsFruit(fruit)" class="btn btn-danger">
+                    -
+                  </button>
+                </div>
+                <div class="col-3">
+                  <button (click)="plusFruit(fruit)" class="btn btn-success">
+                    +
+                  </button>
+                </div>
+              </div>
+              <button
+                (click)="AjouterAuPanier(fruit)"
+                class="btn btn-primary w-100"
+              >
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-4 mt-5">
+      <h2 class="text-center text-info">Panier</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">N°</th>
+            <th scope="col">NOM</th>
+            <th scope="col">QUANTITE</th>
+            <th scope="col">PRIX</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let fruit of panier; index as i">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ fruit.nom }}</td>
+            <td>{{ fruit.quantite }}</td>
+            <td>{{ fruit.prixHT * fruit.quantite }} €</td>
+            <td>{{ calculerPrixTTC(fruit.prixHT) * fruit.quantite }}€</td>
+            <button (click)="retirerDuPanier(fruit)" class="btn btn-danger">
+              X
+            </button>
+          </tr>
+        </tbody>
+      </table>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Qté</th>
+            <th scope="col">PrixHT</th>
+            <th scope="col">Prix TTC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ quantiteTotale() }}</td>
+            <td>{{ prixHT().toFixed(2) }} €</td>
+            <td>{{ prixTTC().toFixed(2) }} €</td>
+            <button (click)="viderPanier()" class="btn btn-danger">X</button>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+a
